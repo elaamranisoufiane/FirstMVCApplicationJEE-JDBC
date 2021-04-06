@@ -1,7 +1,9 @@
 package com.books;
+import com.dao.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -18,13 +20,19 @@ import javax.servlet.http.HttpServletResponse;
 public class ServletController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Book> booksList;
+	private BookDao bookDao;
 
 	/**
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
 	 * @see HttpServlet#HttpServlet()
 	 */
 
-	public ServletController() {
+	public ServletController() throws SQLException, ClassNotFoundException {
 		super();
+		bookDao = new BookDao();
+		bookDao.connect();
+		bookDao.disconnect();
 		booksList = new ArrayList<>();
 		booksList.add(new Book(1, "book one", "Ahmed", 100));
 		booksList.add(new Book(2, "book two", "mohammed", 130));
