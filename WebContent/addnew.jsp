@@ -18,7 +18,7 @@
 	<a href="new" name="urlnew"><h4 class="subtittle">Add new book
 		</h4> </a>
 
-	<form action="insert" method="get">
+	<form action="insert" method="post">
 		<table>
 			<tr>
 				<td><label>Id Book :</label></td>

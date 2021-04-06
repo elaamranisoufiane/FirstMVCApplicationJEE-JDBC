@@ -42,12 +42,8 @@ public class ServletController extends HttpServlet {
 		System.out.println(action);
 		if (action.equals("/new")) {
 			getPageNewAdd(request, response);
-			
-		}else if (action.equals("/insert")) {
-			addBooks(request, response);
-			response.sendRedirect("index");
-			}
-		else {
+
+		} else {
 			showBooks(request, response);
 		}
 
@@ -56,19 +52,29 @@ public class ServletController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		String action = request.getPathInfo();
+		if (action.equals("/insert")) {
+			addBooks(request, response);
+			response.sendRedirect("index");
+			}
 	}
 
-	private void showBooks(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+	private void showBooks(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setAttribute("book_list", booksList);
 		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 		disp.forward(request, response);
 	}
-	private void addBooks(HttpServletRequest request,HttpServletResponse response) {
-		booksList.add(new Book(Integer.parseInt((String) request.getParameter("id")), (String)request.getParameter("title"), (String)request.getParameter("author"),
-		Double.parseDouble((String)request.getParameter("price"))));	
+
+	private void addBooks(HttpServletRequest request, HttpServletResponse response) {
+		booksList.add(new Book(Integer.parseInt((String) request.getParameter("id")),
+				(String) request.getParameter("title"), (String) request.getParameter("author"),
+				Double.parseDouble((String) request.getParameter("price"))));
 	}
-	private void getPageNewAdd(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-	RequestDispatcher disp = request.getRequestDispatcher("/addnew.jsp");
-	disp.forward(request, response);}
+
+	private void getPageNewAdd(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		RequestDispatcher disp = request.getRequestDispatcher("/addnew.jsp");
+		disp.forward(request, response);
+	}
 }
