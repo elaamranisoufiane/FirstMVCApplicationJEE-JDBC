@@ -8,15 +8,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-  <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">  
+<link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1 class="title">Book Store</h1>
 
-	<a href="index"><h4 class="subtittle">List of Books</h4> </a>
-	<a href="new" name="urlnew"><h4 class="subtittle">Add new book
-		</h4> </a>
+	<h4 class="subtittle">
+		<a href="index">List of Books </a>
+	</h4>
+	<h4 class="subtittle">
+		<a href="new" name="urlnew">Add new book </a>
+	</h4>
 
 	<form action="insert" method="post">
 		<table>
@@ -43,7 +47,7 @@
 		</table>
 
 	</form>
- 
+
 
 </body>
 </html>
