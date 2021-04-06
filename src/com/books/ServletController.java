@@ -33,6 +33,7 @@ public class ServletController extends HttpServlet {
 		bookDao = new BookDao();
 		bookDao.connect();
 		bookDao.disconnect();
+		bookDao.disconnect();
 		booksList = new ArrayList<>();
 		booksList.add(new Book(1, "book one", "Ahmed", 100));
 		booksList.add(new Book(2, "book two", "mohammed", 130));
