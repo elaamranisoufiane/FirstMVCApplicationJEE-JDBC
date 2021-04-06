@@ -2,7 +2,9 @@ package com.books;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,25 +17,37 @@ import javax.servlet.http.HttpServletResponse;
 //@WebServlet("/Books/*")
 public class ServletController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private ArrayList<Book> booksList;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 PrintWriter out = response.getWriter();
-		 String name= request.getParameter("name");
-	       out.println("Welcome "+name);
-		
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+
+	public ServletController() {
+		super();
+		booksList = new ArrayList<>();
+		booksList.add(new Book(1, "book one", "Ahmed", 100));
+		booksList.add(new Book(2, "book two", "mohammed",  130));
+		booksList.add(new Book(3, "book tree", "ALi",  50));
+
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		/*
+		 * PrintWriter out = response.getWriter(); String name=
+		 * request.getParameter("name"); out.println("Welcome "+name);
+		 */
+		
+		request.setAttribute("book_list", booksList);
+		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+		disp.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 doGet(request, response);
+		doGet(request, response);
 	}
 
 }
