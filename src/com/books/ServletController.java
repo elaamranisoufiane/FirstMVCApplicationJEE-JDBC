@@ -41,8 +41,7 @@ public class ServletController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println(action);
 		if (action.equals("/new")) {
-			RequestDispatcher disp = request.getRequestDispatcher("/addnew.jsp");
-			disp.forward(request, response);
+			getPageNewAdd(request, response);
 			
 		}else if (action.equals("/insert")) {
 			addBooks(request, response);
@@ -69,4 +68,7 @@ public class ServletController extends HttpServlet {
 		booksList.add(new Book(Integer.parseInt((String) request.getParameter("id")), (String)request.getParameter("title"), (String)request.getParameter("author"),
 		Double.parseDouble((String)request.getParameter("price"))));	
 	}
+	private void getPageNewAdd(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+	RequestDispatcher disp = request.getRequestDispatcher("/addnew.jsp");
+	disp.forward(request, response);}
 }
