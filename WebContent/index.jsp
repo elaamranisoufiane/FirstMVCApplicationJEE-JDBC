@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
+ <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">  
 <title>Insert title here</title>
 </head>
 <body>
@@ -20,10 +20,10 @@
 	<table border="1" class="table">
 		<thead>
 			<tr>
-				<td>ID_Book</td>
-				<td>Book title</td>
-				<td>author</td>
-				<td>price</td>
+				<th>ID_Book</th>
+				<th>Book title</th>
+				<th>author</th>
+				<th>price</th>
 			</tr>
 		</thead>
 		<tbody>

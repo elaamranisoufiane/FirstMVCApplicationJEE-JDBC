@@ -45,9 +45,9 @@ public class ServletController extends HttpServlet {
 			disp.forward(request, response);
 			
 		}else if (action.equals("/insert")) {
-			
-			showBooks(request, response);
-		}
+			addBooks(request, response);
+			response.sendRedirect("index");
+			}
 		else {
 			showBooks(request, response);
 		}
@@ -66,7 +66,7 @@ public class ServletController extends HttpServlet {
 		disp.forward(request, response);
 	}
 	private void addBooks(HttpServletRequest request,HttpServletResponse response) {
-		booksList.add(new Book((Integer)request.getAttribute("id"), (String)request.getAttribute("title"), (String)request.getAttribute("author"),
-		(Double)request.getAttribute("price")));	
+		booksList.add(new Book(Integer.parseInt((String) request.getParameter("id")), (String)request.getParameter("title"), (String)request.getParameter("author"),
+		Double.parseDouble((String)request.getParameter("price"))));	
 	}
 }
