@@ -8,10 +8,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<!-- <link href="css/style.css" rel="stylesheet" type="text/css"> -->
 <title>Insert title here</title>
 </head>
 <body>
-	<table border="1">
+<h1 class="title">Book Store </h1>
+
+ <a href="index"><h4 class="subtittle">List of Books </h4> </a> 
+<a href="new" name="urlnew"><h4 class="subtittle"> Add new book </h4> </a>
+
+	<table border="1" class="table">
 		<thead>
 			<tr>
 				<td>ID_Book</td>
@@ -23,10 +29,10 @@
 		<tbody>
 			<c:forEach items="${book_list}" var="itm">
 				<tr>
-					<td>${itm.id}</td>
-					<td>${itm.title}</td>
-					<td>${itm.author}</td>
-					<td>${itm.id}</td>
+					<td>${itm.getId()}</td>
+					<td>${itm.getTitle()}</td>
+					<td>${itm.getAuthor()}</td>
+					<td>${itm.getPrive()}</td>
 				</tr>
 			</c:forEach>
 

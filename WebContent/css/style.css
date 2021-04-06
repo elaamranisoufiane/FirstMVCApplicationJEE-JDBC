@@ -1,0 +1,23 @@
+
+body
+{
+background-color:#d0e4fe;
+align-content: center;
+text-align: center;
+}
+.title{
+	color:green;
+
+}
+.subtittle{
+	color:green;
+}
+table{
+	align-content: center;
+	text-align: center;
+	border:1;
+	width: 100%;
+	
+}
+
+ 

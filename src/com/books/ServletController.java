@@ -27,8 +27,8 @@ public class ServletController extends HttpServlet {
 		super();
 		booksList = new ArrayList<>();
 		booksList.add(new Book(1, "book one", "Ahmed", 100));
-		booksList.add(new Book(2, "book two", "mohammed",  130));
-		booksList.add(new Book(3, "book tree", "ALi",  50));
+		booksList.add(new Book(2, "book two", "mohammed", 130));
+		booksList.add(new Book(3, "book tree", "ALi", 50));
 
 	}
 
@@ -38,10 +38,20 @@ public class ServletController extends HttpServlet {
 		 * PrintWriter out = response.getWriter(); String name=
 		 * request.getParameter("name"); out.println("Welcome "+name);
 		 */
-		
-		request.setAttribute("book_list", booksList);
-		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
-		disp.forward(request, response);
+		String action = request.getPathInfo();
+		System.out.println(action);
+		if (action.equals("/new")) {
+			RequestDispatcher disp = request.getRequestDispatcher("/addnew.jsp");
+			disp.forward(request, response);
+			
+		}else if (action.equals("/insert")) {
+			
+			showBooks(request, response);
+		}
+		else {
+			showBooks(request, response);
+		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -50,4 +60,13 @@ public class ServletController extends HttpServlet {
 		doGet(request, response);
 	}
 
+	private void showBooks(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("book_list", booksList);
+		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
+		disp.forward(request, response);
+	}
+	private void addBooks(HttpServletRequest request,HttpServletResponse response) {
+		booksList.add(new Book((Integer)request.getAttribute("id"), (String)request.getAttribute("title"), (String)request.getAttribute("author"),
+		(Double)request.getAttribute("price")));	
+	}
 }
