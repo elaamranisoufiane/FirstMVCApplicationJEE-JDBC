@@ -12,6 +12,14 @@ public class Book {
 		this.author = author;
 		this.price = d;
 	}
+	
+	public Book(String title, String author, double price) {
+		super();
+		this.title = title;
+		this.author = author;
+		this.price = price;
+	}
+
 	public Book() {
 		super();
 	}
@@ -33,11 +41,11 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public Double getPrive() {
+	public Double getPrice() {
 		return price;
 	}
-	public void setPrive(float prive) {
-		this.price = prive;
+	public void setPrice(double d) {
+		this.price = d;
 	}
 	
 

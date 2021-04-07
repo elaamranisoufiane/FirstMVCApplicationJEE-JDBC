@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 //@WebServlet("/Books/*")
 public class ServletController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Book> booksList;
 	private BookDao bookDao;
 
 	/**
@@ -31,14 +30,7 @@ public class ServletController extends HttpServlet {
 	public ServletController() throws SQLException, ClassNotFoundException {
 		super();
 		bookDao = new BookDao();
-		bookDao.connect();
-		bookDao.disconnect();
-		bookDao.disconnect();
-		booksList = new ArrayList<>();
-		booksList.add(new Book(1, "book one", "Ahmed", 100));
-		booksList.add(new Book(2, "book two", "mohammed", 130));
-		booksList.add(new Book(3, "book tree", "ALi", 50));
-
+		//booksList.add(new Book(3, "soui", "afd", 133));
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -52,9 +44,13 @@ public class ServletController extends HttpServlet {
 		if (action.equals("/new")) {
 			getPageNewAdd(request, response);
 
-		} else {
+		}else if (action.equals("/delete")) {
+			deleteBook(Integer.parseInt(request.getParameter("id")),request,response);
+		} 
+		else {
 			showBooks(request, response);
 		}
+		
 
 	}
 
@@ -68,17 +64,30 @@ public class ServletController extends HttpServlet {
 			}
 	}
 
-	private void showBooks(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.setAttribute("book_list", booksList);
+	private void showBooks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 
+	      try {
+	    	  request.setAttribute("book_list", bookDao.showAllItems());
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	     
+		 
 		RequestDispatcher disp = request.getRequestDispatcher("/index.jsp");
 		disp.forward(request, response);
 	}
 
 	private void addBooks(HttpServletRequest request, HttpServletResponse response) {
-		booksList.add(new Book(Integer.parseInt((String) request.getParameter("id")),
-				(String) request.getParameter("title"), (String) request.getParameter("author"),
-				Double.parseDouble((String) request.getParameter("price"))));
+		try {
+			bookDao.insertItem(new Book(
+					(String) request.getParameter("title"), (String) request.getParameter("author"),
+					Double.parseDouble((String) request.getParameter("price"))));
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	private void getPageNewAdd(HttpServletRequest request, HttpServletResponse response)
@@ -86,4 +95,14 @@ public class ServletController extends HttpServlet {
 		RequestDispatcher disp = request.getRequestDispatcher("/addnew.jsp");
 		disp.forward(request, response);
 	}
+	private void deleteBook(int id,HttpServletRequest request,HttpServletResponse respense) {
+	try {
+		bookDao.delete(id);
+		respense.sendRedirect("index");
+	} catch (ClassNotFoundException | SQLException | IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	}	
 }

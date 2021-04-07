@@ -32,7 +32,8 @@
 					<td>${itm.getId()}</td>
 					<td>${itm.getTitle()}</td>
 					<td>${itm.getAuthor()}</td>
-					<td>${itm.getPrive()}</td>
+					<td>${itm.getPrice()}</td>
+					<td><a href="delete?id=${itm.getId()}">Delete</a></a></td>
 				</tr>
 			</c:forEach>
 

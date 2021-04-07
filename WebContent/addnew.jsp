@@ -24,10 +24,7 @@
 
 	<form action="insert" method="post">
 		<table>
-			<tr>
-				<td><label>Id Book :</label></td>
-				<td><input type="number" name="id" /></td>
-			</tr>
+		 
 			<tr>
 				<td><label>Title:</label></td>
 				<td><input type="text" name="title" /></td>
