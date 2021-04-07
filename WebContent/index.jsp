@@ -8,14 +8,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
- <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css">  
+<link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
-<h1 class="title">Book Store </h1>
+	<h1 class="title">Book Store</h1>
 
- <a href="index"><h4 class="subtittle">List of Books </h4> </a> 
-<a href="new" name="urlnew"><h4 class="subtittle"> Add new book </h4> </a>
+	<a href="index"><h4 class="subtittle">List of Books</h4> </a>
+	<a href="new" name="urlnew"><h4 class="subtittle">Add new book
+		</h4> </a>
 
 	<table border="1" class="table">
 		<thead>
@@ -33,7 +35,8 @@
 					<td>${itm.getTitle()}</td>
 					<td>${itm.getAuthor()}</td>
 					<td>${itm.getPrice()}</td>
-					<td><a href="delete?id=${itm.getId()}">Delete</a></a></td>
+					<td><a href="delete?id=${itm.getId()}">Delete</a></td>
+					<td><a href="update?id=${itm.getId()}">Edit</a></td>
 				</tr>
 			</c:forEach>
 

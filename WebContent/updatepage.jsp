@@ -22,24 +22,25 @@
 		<a href="new" name="urlnew">Add new book </a>
 	</h4>
 
-	<form action="insert" method="post">
+	<form action="updateitem" method="post">
 		<table>
-
+            
 			<tr>
 				<td><label>Title:</label></td>
-				<td><input type="text" name="title" /></td>
+				<td><input type="text" name="title" value="${book.getTitle()}"/></td>
 			</tr>
 			<tr>
 				<td><label>Author :</label></td>
-				<td><input type="text" name="author" /></td>
+				<td><input type="text" name="author" value="${book.getAuthor()}"/></td>
 			</tr>
 			<tr>
 				<td><label>price :</label></td>
-				<td><input type="number" name="price" /></td>
+				<td><input type="number" name="price" value="${book.getPrice()}"/></td>
 			</tr>
 			<tr>
 				<td><input type="reset" value="RESET" /></td>
-				<td><input type="submit" value="ADD" /></td>
+				
+				<td><input type="hidden" name="id" value="${book.getId()}" /> <input type="submit" value="UPDATE" /></td>
 			</tr>
 		</table>
 

@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
+
 import com.books.Book;
 
 public class BookDao {
@@ -79,8 +81,8 @@ public class BookDao {
 		}
 
 	}
-	
-	public void delete(int id) throws ClassNotFoundException, SQLException{
+
+	public void delete(int id) throws ClassNotFoundException, SQLException {
 		this.connect();
 		String sql = "DELETE FROM books WHERE id=?";
 		try {
@@ -89,11 +91,47 @@ public class BookDao {
 			stm.executeUpdate();
 			stm.close();
 			this.disconnect();
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 	}
+
+	public void update(int id,Book book) throws ClassNotFoundException, SQLException {
+		this.connect();
+		String sql = "UPDATE books SET title=?,author=?,price=? WHERE id=?";
+		try {
+			PreparedStatement stm = JDBCConnection.prepareStatement(sql);
+			stm.setString(1, book.getTitle());
+			stm.setString(2, book.getAuthor());
+			stm.setDouble(3, book.getPrice());
+			stm.setInt(4, book.getId());
+			stm.executeUpdate();
+			stm.close();
+			this.disconnect();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	public Book getItembyID(int id) throws ClassNotFoundException, SQLException {
+		this.connect();
+		Book book=null;
+		String sql = "SELECT * FROM books where id=?";
+		PreparedStatement stm=JDBCConnection.prepareStatement(sql);
+		stm.setInt(1, id);
+		ResultSet rs = stm.executeQuery();
+		while (rs.next()) {
+			book=new Book(rs.getInt("id"),rs.getString("title"), rs.getString("author"), rs.getDouble("price"));		
+		}
+		stm.close();
+		rs.close();
+		this.disconnect();
+		return book;
+	}
+
+	
 
 }
